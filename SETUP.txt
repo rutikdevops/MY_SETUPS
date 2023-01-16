@@ -1,0 +1,392 @@
+SETUP JAVA and JENKINS
+
+
+ec2-user
+sudo su
+yum update -y
+hostnamectl set-hostname JENKINS
+yum install java* -y
+java -version
+ls -la
+
+vi .bash_profile
+       JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64    #(for find this path type-(find / -name javac))
+       PATH=$PATH:$JAVA_HOME:$HOME/bin
+
+
+
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo amazon-linux-extras install java-openjdk11
+yum install jenkins -y
+
+systemctl enable jenkins.service
+systemctl start jenkins.service
+systemctl status jenkins.service
+
+                  #(now, copy paste public ip with :8080)
+                  #(allow inbound rule - all traffic)
+                  #(jenkins login page open use cat command to unlock jenkins)
+                  #(jenkins-dashboard-manage jenkins-global tool configuration- JDK- JDK name=java)
+                                                                                     JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64 (use same link written in above side)
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+
+SETUP OF MAVEN
+
+
+ec2-user
+sudo su
+yum update -y
+hostnamectl set-hostname maven
+cd /opt/
+ls
+mkdir maven
+ls
+cd maven
+ls
+wget https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz  #(chrome-download_apache_maven-binary tar.gz archive-copy_paste)
+ls
+tar -xvzf apache-maven-3.8.7-bin.tar.gz
+ls
+cd apache-maven-3.8.7
+ls
+pwd
+cd /root
+ls -la              #(.bash_profile file is located)
+
+vi .bash_profile
+       # User specific ...//....
+       JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.342.b07-1.amzn2.0.1.x86_64
+       M2_HOME=/opt/maven/apache-maven-3.8.7
+       M2=$M2_HOME/bin
+       PATH=$PATH:$JAVA_HOME:$M2_HOME:$M2:$HOME/bin
+       #PATH=$PATH....//......
+
+
+                    #(jenkins-managejenkins-manageplugins-install (maven invoker))
+                    #(manage jenkins-global tool configuration-maven-maven_name=Maven)
+                                                                     MAVEN_HOME=/opt/maven/apache-maven-3.8.7  (use same link written in above side)
+yum install git -y
+                    #(jenkins-managejenkins-manageplugins-install (github))
+                    #(jenkins-managejenkins-global tool configuration-git-git_name=default)
+                                                                          path to git executable=git
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+SETUP OF TOMCAT SERVER
+
+ec2-user
+sudo su
+yum update -y
+hostnamectl set-hostname java-webpage
+bash
+cd /opt/
+ls
+yum install java-1.8* -y
+wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.84/bin/apache-tomcat-8.5.84.tar.gz  #(google-tomcat_8_download-core-tar.gz-copypasteit)
+tar -xvzf apache-tomcat-8.5.84.tar.gz
+ls
+cd apache-tomcat-8.5.84
+cd bin
+ls
+ps -ef | grep tomcat   #(to check which service is start or not)
+ls -ltr                #(to check permissions are given)
+chmod +x startup.sh
+chmod +x shutdown.sh
+./startup.sh           #(for starting tomcat)
+
+                       #(now, copy paste public ip with :8080)
+                       #(allow inbound rule - all traffic)
+
+cd ..
+ls
+cd conf
+ls
+vi server.xml         #(in that change tomcat port no.8080 to 8090 because jenkins also have 8080 port no)
+                      #(scrolldown change port no 8080 to 8090)
+
+./shutdown.sh         #(firstshutdown it and then startup)
+./startup.sh
+
+
+
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+SETUP OF SONARQUBE
+
+
+ec2-user
+sudo su
+yum update -y
+hostnamectl set-hostname sonarqube
+bash
+java -version
+yum install fontconfig java-11-openjdk -y
+sudo amazon-linux-extras install java-openjdk11 -y
+java -version
+cd /opt
+ls
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.10.61524.zip  #(chrome-downloadsonarqube-latestversion-rightclick-copypaste)
+ls
+unzip sonarqube-8.9.10.61524.zip
+ls
+cd sonarqube-8.9.10.61524
+ls
+cd bin
+ls
+cd linux-x86-64
+ls
+./sonar.sh start
+./sonar.sh status    (in that sonarqube is not running)
+cd ../..
+ls
+cd logs
+useradd sonaradmin
+chown -R sonaradmin:sonaradmin /opt/sonarqube-8.9.10.61524
+pwd
+cd ..
+ls
+su - sonaradmin
+cd /opt/sonarqube-8.9.10.61524/
+ls
+cd bin
+ls
+cd linux-x86-64
+ls
+./sonar.sh start
+./sonar.sh status
+netstat -tulpn        #(command for check port)
+                      #(paste public ip with :9000)
+                      #(securitygroup-inboundrule-all traffic, anywhere)
+                      #(username passwd bydefault is admin)
+
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+INTEGRATE SONARQUBE WITH JENKINS
+
+
+#(install plugin -(sonarqube scanner))
+sonarqube-administator-security-generatetoken-copy it
+jenkins-managejenkins-configuresystem-sonarqubeserver-tick_environmentvariables-addsonarqube-name=sonarqube
+                                                                                             server url=(copy-paste path of sonarqube generatetoken section)
+                                                                                             server auth. section=domain=global credentials(unrestricted)
+                                                                                                                  kind=secret text
+                                                                                                                  scope=global
+                                                                                                                  secret=(paste sonarqube token here)
+                                                                                                                  description=SQ token added today by coach
+                                                                                             Server authentication token section=(add description=SQ token added today by coach)
+
+jenkins-newitem-freestyleproject-SCM Git-add project from git
+build step-invoke top level maven target-Maven Version=maven
+                                         Goals=clean intall sonar:sonar
+advanced- POM=(location of POM located in git)
+
+Build Environment
+         tick=Prepare SonarQube Scanner environment
+
+
+
+
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+
+SETUP OF NEXUS
+
+
+ec2-user
+sudo su
+yum update -y
+hostnamectl set-hostname nexus
+ls
+#(install java)
+ls
+cd /opt
+ls
+wget https://download.sonatype.com/nexus/3/nexus-3.45.0-01-unix.tar.gz
+ls
+tar -xvzf nexus-3.45.0-01-unix.tar.gz
+ls
+mv nexus-3.45.0-01 nexus
+ls
+cd nexus
+ls
+sudo adduser nexus
+visudo               #(in vi editor press (shift+g)), and then add- (nexus ALL=(ALL)   ALL) next of root)
+passwd nexus         #(enter same passwd 2 times)
+sudo chown -R nexus:nexus /opt/nexus 
+ls -ld /opt/nexus
+vi /opt/nexus/bin/nexus.rc
+                    # run_as_user="nexus"  (only type nexus in vi editor) 
+sudo ln -s /opt/nexus/bin/nexus /etc/init.d/nexus
+su - nexus
+service nexus start
+service nexus status
+#(chrome- public ip:8081)
+#sign in
+#username=admin
+#passwd=admin123
+
+
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+SETUP OF NAGIOS
+
+
+ec2-user
+sudo su
+yum update -y
+hostnamectl set-hostname nagios
+bash
+yum install httpd php -y
+yum install gcc glibc glibc-common -y
+yum install gd gd-devel -y
+adduser -m nagios
+passwd nagios    #(enter passwd 2 times)
+groupadd nagioscmd
+usermod -aG nagioscmd nagios
+usermod -aG nagioscmd apache
+mkdir ~/downloads
+cd ~/downloads
+wget https://yer.dl.sourceforge.net/project/nagios/nagios-4.x/nagios-4.0.8/nagios-4.0.8.tar.gz
+tar -xvzf nagios-4.0.8.tar.gz
+ls
+wget http://nagios-plugins.org/download/nagios-plugins-2.0.3.tar.gz
+tar -xvzf nagios-plugins-2.0.3.tar.gz
+ls
+cd nagios-4.0.8
+./configure --with-command-group=nagioscmd
+make all
+make install
+make install-init
+make install-config
+make install-commandmode
+
+#######(use this command if want to change email_id-(vim /usr/local/nagios/etc/objects/contacts.cfg))########
+
+make install-webconf
+htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin    #(enter passwd 2 times)
+service httpd restart
+cd ~/downloads
+tar -xvzf nagios-plugins-2.0.3.tar.gz
+cd nagios-plugins-2.0.3
+./configure --with-nagios-user=nagios --with-nagios-group=nagios
+make
+make install
+chkconfig --add nagios
+chkconfig nagios on
+/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+service nagios start
+service httpd restart
+
+#(paste public_ip with /nagios/)
+#(username=nagiosadmin , passwd=cloud)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

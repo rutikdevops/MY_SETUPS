@@ -1,0 +1,50 @@
+ec2-user
+sudo su
+yum update -y
+hostnamectl set-hostname django
+bash
+yum install git -y
+git clone https://github.com/LondheShubham153/django-tutorial.git
+ls
+cd django-tutorial/
+ls
+yum install python3 -y
+pip3 install django
+python3 manage.py runserver    #(press ctrl+c for go to the terminal)
+sudo pip3 install psycopg2-binary
+sudo pip3 install pillow
+amazon-linux-extras install postgresql10 vim epel -y
+yum install -y postgresql-server postgresql-devel
+/usr/bin/postgresql-setup –-initdb
+systemctl status postgresql
+systemctl start postgresql
+systemctl status postgresql.service
+service postgresql initdb
+systemctl start postgresql
+systemctl status postgresql.service
+psql -U postgres
+sudo -u postgres psql
+\passwd      #(enter password 2 times)
+\q           #(for exit)
+python3 manage.py runserver
+vi shubham/settings.py
+       'USER': 'postgres',         #(type postgres instead of ('USER': 'coindelta',), its available in database section)
+sudo -u postgres psql
+create database portfoliodb;       #(for exit)
+sudo vim /var/lib/pgsql/data/pg_hba.conf
+service postgresql restart
+python3 manage.py runserver
+
+
+
+
+
+
+
+
+
+
+
+
+
+
