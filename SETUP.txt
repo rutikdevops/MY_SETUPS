@@ -1,3 +1,9 @@
+pam ----->>>  ppk
+
+
+
+
+
 SETUP JAVA and JENKINS
 
 
@@ -7,6 +13,7 @@ yum update -y
 hostnamectl set-hostname JENKINS
 yum install java* -y
 java -version
+alternatives --config java           ## you can choose any version of Java
 ls -la
 
 vi .bash_profile
