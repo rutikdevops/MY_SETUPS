@@ -16,7 +16,7 @@ java -version
 alternatives --config java           ## you can choose any version of Java
 ls -la
 
-vi .bash_profile
+vi .bash_profile                                                
        JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64    #(for find this path type-(find / -name javac))
        PATH=$PATH:$JAVA_HOME:$HOME/bin
 
@@ -72,7 +72,7 @@ pwd
 cd /root
 ls -la              #(.bash_profile file is located)
 
-vi .bash_profile
+vi .bash_profile    ## you can use this command also (vi ~/.bash_profile)
        # User specific ...//....
        JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.342.b07-1.amzn2.0.1.x86_64
        M2_HOME=/opt/maven/apache-maven-3.8.7
@@ -80,7 +80,9 @@ vi .bash_profile
        PATH=$PATH:$JAVA_HOME:$M2_HOME:$M2:$HOME/bin
        #PATH=$PATH....//......
 
-
+sudo su -
+echo $PATH
+echo $M2
                     #(jenkins-managejenkins-manageplugins-install (maven invoker))
                     #(manage jenkins-global tool configuration-maven-maven_name=Maven)
                                                                      MAVEN_HOME=/opt/maven/apache-maven-3.8.7  (use same link written in above side)
