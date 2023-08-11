@@ -345,13 +345,54 @@ service httpd restart
 
 
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+                                                                MAVEN SETUP
+
+sudo su
+cd ~
+pwd   //root directory
+cd /opt
+wget https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz
+tar -xvzf apache-maven-3.9.4-bin.tar.gz
+ls
+mv apache-maven-3.9.4 maven
+cd maven/
+ls
+cd bin/
+./mvn -v
+cd ..
+cd ~
+ll -a
+vim .bash_profile
+@@@@@@ Add this in editor @@@@@@@
+# .bash_profile
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+M2_HOME=/opt/maven
+M2=/opt/maven/bin
+JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto.x86_64
+# User specific environment and startup programs
+PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2
+export PATH
 
 
 
+@@@@@@ To find the path of java@@@@@@
+[root@jenkins ec2-user]# find / -name java-11*
+/usr/lib/jvm/java-11-amazon-corretto.x86_64                         // Copy this path
+/usr/lib/jvm/java-11-openjdk
+/usr/share/licenses/java-11-amazon-corretto-javadoc-11.0.20+8
+/usr/share/doc/java-11-amazon-corretto-javadoc-11.0.20+8
+[root@jenkins ec2-user]#
 
 
-
-
+echo $PATH                     // not showing maven path
+source .bash_profile
+echo $PATH                    //  Now showing maven path
 
 
 
