@@ -32,10 +32,10 @@ cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-time 52.21
-![image](https://github.com/rutikdevops/MY_SETUPS/assets/109506158/b025aadf-899c-4f99-af6c-802a8445e1d6)
 
 - copy the command and paste it in notepad
+![image](https://github.com/rutikdevops/MY_SETUPS/assets/109506158/b025aadf-899c-4f99-af6c-802a8445e1d6)
+
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
@@ -43,6 +43,8 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 
 - CONFIGURE WORKER NODES (IN NODES)
 - COPY LONG CODE PROVIDED MY MASTER WHICH IS PRESENT IN NOTEPAD -> AND PASTE IT IN NODES
+e.g- kubeadm join 172.31.6.165:6443 --token kl9fhu.co2n90v3rxtqllrs --discovery-token-ca-cert-hash sha256:b0f8003d23dbf445e0132a53d7aa1922bdef8d553d9eca06e65c928322b3e7c0
+
 
 
 - GO TO MASTER AND RUN THIS COMMAND
