@@ -46,9 +46,16 @@ kubectl get pods
 kubectl get pods -o wide
 ```
 
+- For check full oveerview of pod
+```bash
+kubectl describe pod testpod
+```
 
 
-
+- For check overview of inside the container
+```bash
+kubectl logs -f testpod
+```
 
 
 
