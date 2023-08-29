@@ -62,6 +62,56 @@ kubectl logs -f testpod
 kubectl logs -f testpod -c c00
 ```
 
+- for Delete the pod
+```bash
+kubectl delete pod testpod
+```
+
+
+
+- Use of annotation
+```bash
+kind: Pod                              
+apiVersion: v1                     
+metadata:                           
+  name: testpod
+  annotations:
+    description: This is my 1st pod              
+spec:                                    
+  containers:                      
+    - name: c00                     
+      image: ubuntu              
+      command: ["/bin/bash", "-c", "while true; do echo Hello-Bhupinder; sleep 5 ; done"]
+  restartPolicy: Never         # Defaults to Always
+```
+- Run the file
+```bash
+kubectl apply -f pod1.yml                      // -f (foecefully)
+```
+
+
+
+
+- MULTI CONTAINER POD ENVIRONMENT 
+```bash
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testpod3
+spec:
+  containers:
+    - name: c00
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Technical-Guftgu; sleep 5 ; done"]
+    - name: c01
+      image: ubuntu
+      command: ["/bin/bash", "-c", "while true; do echo Hello-Bhupinder; sleep 5 ; done"]
+```
+
+
+
+
+
 
 
 
