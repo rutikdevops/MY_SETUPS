@@ -57,8 +57,10 @@ kubectl describe pod testpod
 kubectl logs -f testpod
 ```
 
-
-
+- For check overview of inside the particular container
+```bash
+kubectl logs -f testpod -c c00
+```
 
 
 
