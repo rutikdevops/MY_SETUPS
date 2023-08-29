@@ -33,7 +33,7 @@ spec:
 ```
 - Run the file
 ```bash
-kubectl apply -f pod1.yml
+kubectl apply -f pod1.yml                      // -f (foecefully)
 ```
 
 
