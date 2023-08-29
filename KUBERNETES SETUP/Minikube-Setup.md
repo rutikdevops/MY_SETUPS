@@ -30,8 +30,12 @@ spec:
       command: ["/bin/bash", "-c", "while true; do echo Hello-Bhupinder; sleep 5 ; done"]
   restartPolicy: Never         # Defaults to Always
 
+```
+- Run the file
+```bash
 kubectl apply -f pod1.yml
 ```
+
 
 
 
