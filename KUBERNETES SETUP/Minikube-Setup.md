@@ -92,12 +92,13 @@ kubectl apply -f pod1.yml                      // -f (foecefully)
 
 
 
-- MULTI CONTAINER POD ENVIRONMENT 
+- MULTI CONTAINER POD ENVIRONMENT
+- vi pod2.yml
 ```bash
 kind: Pod
 apiVersion: v1
 metadata:
-  name: testpod3
+  name: testpod2
 spec:
   containers:
     - name: c00
@@ -107,7 +108,11 @@ spec:
       image: ubuntu
       command: ["/bin/bash", "-c", "while true; do echo Hello-Bhupinder; sleep 5 ; done"]
 ```
-
+- Run the file
+```bash
+kubectl apply -f pod2.yml                    // -f (foecefully)
+kubectl get pods
+```
 
 
 
