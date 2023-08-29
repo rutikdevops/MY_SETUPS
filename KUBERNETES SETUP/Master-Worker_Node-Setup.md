@@ -11,8 +11,9 @@ systemctl start docker
 systemctl enable docker
 ```
 
-sudo curl -s https://packages.cloud.google.com/apt... | sudo apt-key add 
-https://packages.cloud.google.com/apt/doc/apt-key.gpg
+- sudo curl -s https://packages.cloud.google.com/apt... | sudo apt-key add   //
+- https://packages.cloud.google.com/apt/doc/apt-key.gpg
+// both the links are same
 ```bash
 sudo curl -s https://packages.cloud.google.com/apt... | sudo apt-key add     // we can able to connect master to node
 nano /etc/apt/sources.list.d/kubernetes.list
