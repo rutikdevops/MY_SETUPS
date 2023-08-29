@@ -32,8 +32,32 @@ cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-kubectl apply -f https://raw.githubusercontent.com/cor...
-kubectl apply -f https://raw.githubusercontent.com/cor...
+time 52.21
+![image](https://github.com/rutikdevops/MY_SETUPS/assets/109506158/b025aadf-899c-4f99-af6c-802a8445e1d6)
+
+- copy the command and paste it in notepad
+```bash
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+```
+
+- CONFIGURE WORKER NODES (IN NODES)
+- COPY LONG CODE PROVIDED MY MASTER WHICH IS PRESENT IN NOTEPAD -> AND PASTE IT IN NODES
+
+
+- GO TO MASTER AND RUN THIS COMMAND
+```bash
+kubectl get nodes
+```
+
+
+
+
+
+
+
+
+
 
 
 
