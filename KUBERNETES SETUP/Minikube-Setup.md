@@ -36,6 +36,16 @@ spec:
 kubectl apply -f pod1.yml                      // -f (foecefully)
 ```
 
+- For check th pods
+```bash
+kubectl get pods
+```
+
+ - For check details of pods
+```bash
+kubectl get pods -o wide
+```
+
 
 
 
