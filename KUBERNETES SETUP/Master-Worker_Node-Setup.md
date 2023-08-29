@@ -17,15 +17,23 @@ systemctl enable docker
 ```bash
 sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add           // we can able to connect master to node
 nano /etc/apt/sources.list.d/kubernetes.list
-deb http://apt.kubernetes.io/ kubernetes-xenial main
+deb http://apt.kubernetes.io/ kubernetes-xenial main                                            // paste this in nano file & ntrl-X & capital Y for exit
 apt-get update
 apt-get install -y kubelet kubeadm kubectl kubernetes-cni
 ```
 
 
-- BOOTSTRAPPING THE MASTER NODE (IN MASTER)
+- BOOTSTRAPPING THE MASTER NODE (IN MASTER NODE ONLY)
+```bash
+kubeadm init
+//COPY THE COMMAND TO RUN IN NODES & SAVE IN NOTEPAD
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+```
 
-
+kubectl apply -f https://raw.githubusercontent.com/cor...
+kubectl apply -f https://raw.githubusercontent.com/cor...
 
 
 
