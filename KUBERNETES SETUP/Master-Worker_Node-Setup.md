@@ -1,3 +1,6 @@
+# Video Reference :-
+https://youtu.be/ftrAFHL6w2c?feature=shared
+
 - Create 3 ec2 instance
 - Here I will user free tier Ubuntu server
 1 ec2 for Master = t2.medium
