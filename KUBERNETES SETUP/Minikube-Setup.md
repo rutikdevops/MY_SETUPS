@@ -11,6 +11,7 @@ apt update && apt -y install docker.io
 
 apt instll conntrack
 minikube start --vm-driver=none
+sudo minikube start --force
 minikube status
 kubectl version
 kubectl get nodes
