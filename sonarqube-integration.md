@@ -1,3 +1,4 @@
+- Install required sonar plugins in jenkins
 - Install Docker
 ```bash
 sudo apt-get update
